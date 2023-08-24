@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom Pxy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Axiom Prxy</h1>
+        <form id="proxy-form">
+            <input type="text" id="url" placeholder="Enter URL">
+            <button type="submit">Fetch</button>
+        </form>
+        <div id="content"></div>
+    </div>
+
+    <script src="script.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("proxy-form");
+    const contentDiv = document.getElementById("content");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const url = document.getElementById("url").value;
+        fetchProxyContent(url);
+    });
+
+    function fetchProxyContent(url) {
+        fetch("nature.php?url=" + encodeURIComponent(url))
+            .then(response => response.text())
+            .then(data => {
+                contentDiv.innerHTML = data;
+            })
+            .catch(error => {
+                contentDiv.innerHTML = "An error occurred: " + error;
+            });
+    }
+});
+
+</script>
+</body>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: pink;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#container {
+    max-width: 800px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+#proxy-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#url {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    width: 70%;
+}
+
+#url:focus {
+    outline: none;
+    border-color: dodgerblue;
+}
+
+button {
+    background-color: dodgerblue;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0069d9;
+}
+
+#content {
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+</style>
+</html>
