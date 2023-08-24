@@ -18,11 +18,17 @@
 
 <script>
     const form = document.getElementById("proxy-form");
-    function main(){
     const contentDiv = document.getElementById("content");
-    const url = document.getElementById("url").value;
-    fetchProxyContent(url);
-    };
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        main();
+    });
+
+    function main() {
+        const url = document.getElementById("url").value;
+        fetchProxyContent(url);
+    }
 
     function fetchProxyContent(url) {
         fetch("nature.php?url=" + encodeURIComponent(url))
@@ -34,9 +40,8 @@
                 contentDiv.innerHTML = "An error occurred: " + error;
             });
     }
-});
-
 </script>
+</body>
 </body>
 <style>
   body {
