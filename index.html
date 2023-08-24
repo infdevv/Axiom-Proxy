@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="container">
-        <h1>Axiom Prxy</h1>
+        <h1>Axiom Proxy</h1>
         <form id="proxy-form">
             <input type="text" id="url" placeholder="Enter URL">
             <button type="submit">Fetch</button>
@@ -16,22 +16,27 @@
         <div id="content"></div>
     </div>
 
-<script>
-    const form = document.getElementById("proxy-form");
-    const contentDiv = document.getElementById("content");
+    <script>
+        const form = document.getElementById("proxy-form");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            main();
+        });
 
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        main();
-    });
+        function main() {
+            const contentDiv = document.getElementById("content");
+            const url = document.getElementById("url").value;
+            fetchProxyContent(url, contentDiv);
+        }
 
-    function main() {
-        const url = document.getElementById("url").value;
-        fetchProxyContent(url);
-    }
-
-    function fetchProxyContent(url) {
-        fetch("nature.php?url=" + encodeURIComponent(url))
+        function fetchProxyContent(url, contentDiv) {
+            fetch("proxy.php", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'url=' + encodeURIComponent(url),
+            })
             .then(response => response.text())
             .then(data => {
                 contentDiv.innerHTML = data;
@@ -39,12 +44,10 @@
             .catch(error => {
                 contentDiv.innerHTML = "An error occurred: " + error;
             });
-    }
-</script>
-</body>
-</body>
-<style>
-  body {
+        }
+    </script>
+    <style>
+         body {
     font-family: Arial, sans-serif;
     background-color: pink;
     margin: 0;
@@ -103,5 +106,6 @@ button:hover {
     border-top: 1px solid #ccc;
     padding-top: 20px;
 }
-</style>
+    </style>
+</body>
 </html>
