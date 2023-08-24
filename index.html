@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Axiom Pxy</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="container">
@@ -16,17 +15,13 @@
         <div id="content"></div>
     </div>
 
-    <script src="script.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("proxy-form");
+    function main(){
     const contentDiv = document.getElementById("content");
-
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        const url = document.getElementById("url").value;
-        fetchProxyContent(url);
-    });
+    const url = document.getElementById("url").value;
+    fetchProxyContent(url);
+    };
 
     function fetchProxyContent(url) {
         fetch("nature.php?url=" + encodeURIComponent(url))
