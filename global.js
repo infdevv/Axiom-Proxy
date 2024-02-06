@@ -1,15 +1,4 @@
- // Set the page title to "Google Classroom"
- document.title = "My Drive - Google Drive";
- setTimeout(function(){
- // Set the page icon to "google-classroom.png"
- var link = document.querySelector("link[rel~='icon']");
- if (!link) {
-     link = document.createElement('link');
-     link.rel = 'icon';
-     document.head.appendChild(link);
- }
- link.href = 'https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png';
- },2000)
+
  
  // define the proxy for all the world to see
  function proxy(url){
